@@ -19,4 +19,20 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Task> tasks = new ArrayList<>();
+    public Category() {}
+
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+        task.setCategory(this);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
+        task.setCategory(null);
+    }
 }

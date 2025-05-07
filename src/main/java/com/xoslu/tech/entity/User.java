@@ -11,8 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +24,15 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Task> tasks = new ArrayList<>();
+    public User() {}
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public void assignTask(Task task) {
+        tasks.add(task);
+        task.setUser(this);
+    }
 }

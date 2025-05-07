@@ -9,10 +9,9 @@ import java.time.LocalDate;
 @Table(name = "tasks")
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@NamedQuery(name = "toto", query = "SELECT t FROM Task t WHERE t.isCompleted = :completed")
 public class Task {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -33,4 +32,13 @@ public class Task {
 
     @ManyToOne
     private Category category;
+
+    public Task() {}
+
+    public Task(String title, String description, LocalDate dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.isCompleted = false;
+    }
 }
